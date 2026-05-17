@@ -9,10 +9,7 @@
 }
 
 .fast {
-  background: linear-gradient(90deg, var(--accent), #1a55e8);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: inherit;
 }
 
 .sub {
