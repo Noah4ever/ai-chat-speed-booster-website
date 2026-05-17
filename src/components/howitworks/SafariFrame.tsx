@@ -30,7 +30,7 @@ export default function SafariFrame({
 
         <span className={styles.address}>
           <Lock size={11} strokeWidth={2.4} />
-          chatgpt.com
+          your-ai-chat.com
         </span>
 
         <span

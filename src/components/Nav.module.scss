@@ -56,7 +56,7 @@
 }
 
 .active {
-  color: var(--text);
+  color: var(--accent) !important;
 }
 
 .active::after {

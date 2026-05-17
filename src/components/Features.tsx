@@ -1,4 +1,5 @@
-import { Code, Globe, ShieldCheck, Sparkles, Undo2, Zap, type LucideIcon } from "lucide-react";
+import { ArrowRight, Code, Globe, ShieldCheck, Sparkles, Undo2, Zap, type LucideIcon } from "lucide-react";
+import { links } from "../lib/links";
 import styles from "./Features.module.scss";
 
 interface Feature {
@@ -60,6 +61,18 @@ export default function Features() {
               <p className={styles.body}>{feature.body}</p>
             </div>
           ))}
+        </div>
+
+        <div className={styles.footer}>
+          <a
+            className={styles.footerLink}
+            href={links.github}
+            target="_blank"
+            rel="noreferrer noopener"
+          >
+            Find out how it works behind the scenes
+            <ArrowRight size={15} strokeWidth={2} />
+          </a>
         </div>
       </div>
     </section>

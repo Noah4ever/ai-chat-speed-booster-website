@@ -9,10 +9,24 @@ const POPUP_CSS =
 
 // Builds a self-contained document: the popup markup with its stylesheet
 // inlined and the script removed, since popup.js needs the extension runtime.
+// We also pre-fill realistic values so the UI doesn't show "Loading…".
 function buildDocument(html: string, css: string): string {
   return html
     .replace(/<link[^>]*popup\.css[^>]*>/i, `<style>${css}</style>`)
-    .replace(/<script[^>]*>\s*<\/script>/gi, "");
+    .replace(/<script[^>]*>\s*<\/script>/gi, "")
+    // Replace "Loading…" status with something real-looking
+    .replace(
+      /(<p[^>]*id="status-text"[^>]*>)[^<]*/,
+      "$1Active on this page",
+    )
+    .replace(/(<p[^>]*id="version-text"[^>]*>)[^<]*/, "$1v1.2.0")
+    // Enable the main toggle and the two most important feature toggles
+    .replace(/(<input[^>]*id="toggle-enabled"[^>]*?)>/, "$1 checked>")
+    .replace(/(<input[^>]*id="toggle-fetch-intercept"[^>]*?)>/, "$1 checked>")
+    .replace(/(<input[^>]*id="toggle-hide-old"[^>]*?)>/, "$1 checked>")
+    // Fill number inputs so they don't appear blank
+    .replace(/(<input[^>]*id="visible-limit"[^>]*?)>/, '$1 value="20">')
+    .replace(/(<input[^>]*id="batch-size"[^>]*?)>/, '$1 value="10">');
 }
 
 export default function PopupShowcase() {

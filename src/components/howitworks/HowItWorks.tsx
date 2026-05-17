@@ -21,7 +21,7 @@ function reducedMotion() {
 export default function HowItWorks() {
   const [phase, setPhase] = useState<Phase>("idle");
   const [cursor, setCursor] = useState(startPoint);
-  const [cursorVisible, setCursorVisible] = useState(true);
+  const [cursorVisible, setCursorVisible] = useState(false);
   const [enabled, setEnabled] = useState(false);
   const [clicking, setClicking] = useState(false);
   const [finished, setFinished] = useState(false);
@@ -36,35 +36,33 @@ export default function HowItWorks() {
 
   useEffect(() => clearTimers, [clearTimers]);
 
-  const schedule = (delay: number, action: () => void) => {
-    timers.current.push(window.setTimeout(action, delay));
-  };
-
-  const click = () => {
-    setClicking(true);
-    schedule(360, () => setClicking(false));
-  };
-
-  // Measures a marked element and returns its centre as a percentage of the
-  // browser frame, so the cursor lands exactly on it at any size.
-  const pointAt = (name: "ext" | "toggle") => {
-    const root = demoRef.current;
-    if (!root) return null;
-    const frame = root.querySelector('[data-demo="frame"]');
-    const target = root.querySelector(`[data-demo="${name}"]`);
-    if (!frame || !target) return null;
-    const f = frame.getBoundingClientRect();
-    const t = target.getBoundingClientRect();
-    return {
-      x: ((t.left + t.width / 2 - f.left) / f.width) * 100,
-      y: ((t.top + t.height / 2 - f.top) / f.height) * 100,
-    };
-  };
-
   const play = useCallback(() => {
     clearTimers();
     setFinished(false);
     setEnabled(false);
+
+    const schedule = (delay: number, action: () => void) => {
+      timers.current.push(window.setTimeout(action, delay));
+    };
+
+    const click = () => {
+      setClicking(true);
+      schedule(360, () => setClicking(false));
+    };
+
+    const pointAt = (name: "ext" | "toggle") => {
+      const root = demoRef.current;
+      if (!root) return null;
+      const frame = root.querySelector('[data-demo="frame"]');
+      const target = root.querySelector(`[data-demo="${name}"]`);
+      if (!frame || !target) return null;
+      const f = frame.getBoundingClientRect();
+      const t = target.getBoundingClientRect();
+      return {
+        x: ((t.left + t.width / 2 - f.left) / f.width) * 100,
+        y: ((t.top + t.height / 2 - f.top) / f.height) * 100,
+      };
+    };
 
     if (reducedMotion()) {
       setPhase("ready");
@@ -74,32 +72,33 @@ export default function HowItWorks() {
       return;
     }
 
-    setCursorVisible(true);
+    setCursorVisible(false);
     setCursor(startPoint);
     setPhase("lagging");
 
-    // Drift jankily towards the extension icon.
-    schedule(60, () => {
+    // After the 3 scroll cycles (5.4s), show the cursor and move to the extension icon.
+    schedule(5400, () => {
+      setCursorVisible(true);
       const point = pointAt("ext");
       if (point) setCursor(point);
     });
 
     // Open the popup, then move to its toggle.
-    schedule(3400, () => {
+    schedule(6200, () => {
       click();
       setPhase("enabling");
     });
-    schedule(3540, () => {
+    schedule(6340, () => {
       const point = pointAt("toggle");
       if (point) setCursor(point);
     });
-    schedule(4300, () => {
+    schedule(7100, () => {
       click();
       setEnabled(true);
     });
 
     // Hand control back to the visitor.
-    schedule(5100, () => {
+    schedule(7900, () => {
       setPhase("ready");
       setCursorVisible(false);
       setFinished(true);

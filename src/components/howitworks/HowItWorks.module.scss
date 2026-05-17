@@ -137,6 +137,26 @@
   height: 100%;
   overflow-y: auto;
   scroll-behavior: smooth;
+
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: var(--border-strong);
+    border-radius: 99px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: var(--text-muted);
+  }
+
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-strong) transparent;
 }
 
 .stream {
@@ -147,16 +167,17 @@
 }
 
 .streamLagging {
-  animation: lagScroll 3.2s steps(7, jump-both) forwards;
+  animation: lagScroll 5.4s ease-in-out forwards;
 }
 
 @keyframes lagScroll {
-  from {
-    transform: translateY(0);
-  }
-  to {
-    transform: translateY(150px);
-  }
+  0%     { transform: translateY(0); }
+  16.67% { transform: translateY(140px); }
+  33.33% { transform: translateY(0); }
+  50%    { transform: translateY(140px); }
+  66.67% { transform: translateY(0); }
+  83.33% { transform: translateY(140px); }
+  100%   { transform: translateY(0); }
 }
 
 .rowUser {

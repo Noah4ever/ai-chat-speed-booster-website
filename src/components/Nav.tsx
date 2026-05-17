@@ -34,7 +34,7 @@ export default function Nav() {
           if (entry.isIntersecting) setActiveId(entry.target.id);
         });
       },
-      { rootMargin: "-45% 0px -50% 0px" },
+      { rootMargin: "-20% 0px -35% 0px" },
     );
 
     navItems.forEach(({ id }) => {

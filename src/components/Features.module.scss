@@ -40,3 +40,22 @@
     grid-template-columns: 1fr;
   }
 }
+
+.footer {
+  margin-top: var(--space-12);
+  text-align: center;
+}
+
+.footerLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--accent);
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+
+  &:hover {
+    text-decoration-thickness: 2px;
+  }
+}
