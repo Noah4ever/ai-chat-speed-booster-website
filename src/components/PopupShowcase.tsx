@@ -13,7 +13,7 @@ const POPUP_CSS =
 function buildDocument(html: string, css: string): string {
   return html
     .replace(/<link[^>]*popup\.css[^>]*>/i, `<style>${css}</style>`)
-    .replace(/<script[^>]*><\/script>/gi, "");
+    .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, "");
 }
 
 export default function PopupShowcase() {
@@ -24,9 +24,11 @@ export default function PopupShowcase() {
 
   useEffect(() => {
     let active = true;
+    // Always fetch fresh — no-cache so any popup.html/css update is picked up immediately.
+    const opts: RequestInit = { cache: "no-cache" };
     Promise.all([
-      fetch(POPUP_HTML).then((r) => (r.ok ? r.text() : Promise.reject())),
-      fetch(POPUP_CSS).then((r) => (r.ok ? r.text() : Promise.reject())),
+      fetch(POPUP_HTML, opts).then((r) => (r.ok ? r.text() : Promise.reject())),
+      fetch(POPUP_CSS, opts).then((r) => (r.ok ? r.text() : Promise.reject())),
     ])
       .then(([html, css]) => {
         if (active) setDoc(buildDocument(html, css));
@@ -43,31 +45,53 @@ export default function PopupShowcase() {
     const iframeDoc = frameRef.current?.contentDocument;
     if (!iframeDoc) return;
 
+    // The popup CSS hides .popup-settings by default (display:none) because the
+    // extension JS shows it only on supported sites. Force it visible here.
+    const settings = iframeDoc.querySelector<HTMLElement>(".popup-settings");
+    if (settings) settings.style.display = "flex";
+
+    // Show the weekly request counter (hidden attribute set in HTML).
+    const counter = iframeDoc.getElementById("request-counter");
+    if (counter) counter.removeAttribute("hidden");
+
     const setText = (id: string, text: string) => {
       const el = iframeDoc.getElementById(id);
       if (el) el.textContent = text;
     };
-
     const setChecked = (id: string) => {
       const el = iframeDoc.getElementById(id) as HTMLInputElement | null;
       if (el) el.checked = true;
     };
-
     const setValue = (id: string, val: string) => {
       const el = iframeDoc.getElementById(id) as HTMLInputElement | null;
       if (el) el.value = val;
     };
 
     setText("status-text", "Active on this page");
-    setText("version-text", "v1.2.0");
+    setText("version-text", "v1.4.5");
     setChecked("toggle-enabled");
     setChecked("toggle-fetch-intercept");
     setChecked("toggle-hide-old");
-    setValue("visible-limit", "20");
-    setValue("batch-size", "10");
+    setChecked("toggle-status");
+    setValue("visible-limit", "3");
+    setValue("batch-size", "3");
 
-    const body = iframeDoc.body;
-    if (body) setHeight(body.scrollHeight + 8);
+    // Activate the bottom-right position picker button to match real default.
+    const picker = iframeDoc.querySelector<HTMLElement>(
+      '.position-picker__btn[data-pos="bottom-right"]',
+    );
+    if (picker) picker.classList.add("active");
+
+    // Show a realistic request count.
+    setText("request-count-value", "154");
+    setValue("request-limit-input", "3000");
+    setText("request-counter-hint", `Resets Mon, May 18`);
+
+    // Resize iframe to fit the full rendered height now that settings are visible.
+    requestAnimationFrame(() => {
+      const body = iframeDoc.body;
+      if (body) setHeight(body.scrollHeight + 4);
+    });
   }
 
   return (
