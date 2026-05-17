@@ -8,6 +8,13 @@
   margin-inline: auto;
 }
 
+.fast {
+  background: linear-gradient(90deg, var(--accent), #1a55e8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
 .sub {
   max-width: 40rem;
   margin: var(--space-6) auto 0;

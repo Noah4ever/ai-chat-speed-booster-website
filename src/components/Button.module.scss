@@ -19,13 +19,13 @@
 }
 
 .primary {
-  background: var(--accent);
-  border-color: var(--accent);
+  background: var(--btn-primary);
+  border-color: var(--btn-primary);
   color: #fff;
 
   &:hover {
-    background: var(--accent-hover);
-    border-color: var(--accent-hover);
+    background: var(--btn-primary-hover);
+    border-color: var(--btn-primary-hover);
   }
 }
 

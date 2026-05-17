@@ -31,7 +31,7 @@ export default function Hero() {
   return (
     <section className={styles.hero}>
       <div className="container">
-        <h1 className={styles.headline}>Make your AI chats feel fast again.</h1>
+        <h1 className={styles.headline}>Make your AI chats feel <span className={styles.fast}>fast</span> again.</h1>
 
         <p className={styles.sub}>
           ChatGPT, Claude and Gemini get slower the longer a chat runs. AI Chat

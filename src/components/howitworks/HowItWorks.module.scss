@@ -342,7 +342,11 @@
 }
 
 .cursor_enabling {
-  transition: left 0.7s var(--ease), top 0.7s var(--ease);
+  transition: left 0.7s steps(5, jump-both), top 0.7s steps(5, jump-both);
+}
+
+.cursor_boosted {
+  transition: left 0.5s var(--ease), top 0.5s var(--ease);
 }
 
 .cursor_ready {

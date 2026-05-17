@@ -5,13 +5,11 @@ import SafariFrame from "./SafariFrame";
 import type { Phase } from "./types";
 import styles from "./HowItWorks.module.scss";
 
-const startPoint = { x: 24, y: 74 };
-
 const captions: Record<Phase, string> = {
   idle: "A long conversation, before and after the booster. Press play to watch.",
-  lagging: "Without the extension — scrolling stutters because the browser redraws every message.",
+  lagging: "Without the extension, scrolling stutters because the browser redraws every message.",
   enabling: "One click. The extension toggle turns on.",
-  boosted: "With the extension — the same chat, now scrolling smoothly.",
+  boosted: "With the extension enabled, the same chat scrolls smoothly.",
   ready: "Try it yourself. Scroll inside the window and load older messages.",
 };
 
@@ -21,11 +19,10 @@ function reducedMotion() {
 
 export default function HowItWorks() {
   const [phase, setPhase] = useState<Phase>("idle");
-  const [cursor, setCursor] = useState(startPoint);
+  const [cursor, setCursor] = useState({ x: 48, y: 66 });
   const [cursorVisible, setCursorVisible] = useState(false);
   const [enabled, setEnabled] = useState(false);
   const [clicking, setClicking] = useState(false);
-  const [finished, setFinished] = useState(false);
 
   const demoRef = useRef<HTMLDivElement>(null);
   const timers = useRef<number[]>([]);
@@ -39,7 +36,6 @@ export default function HowItWorks() {
 
   const play = useCallback(() => {
     clearTimers();
-    setFinished(false);
     setEnabled(false);
 
     const schedule = (delay: number, action: () => void) => {
@@ -69,49 +65,52 @@ export default function HowItWorks() {
       setPhase("ready");
       setEnabled(true);
       setCursorVisible(false);
-      setFinished(true);
       return;
     }
 
     setCursorVisible(false);
-    setCursor(startPoint);
+    setCursor({ x: 48, y: 66 });
     setPhase("lagging");
 
-    // After the choppy lag animation (~3.2s), cursor appears and moves to the ext icon.
-    schedule(3300, () => {
+    // 50 ms after first render: cursor appears and starts lagging toward the ext icon.
+    schedule(50, () => {
       setCursorVisible(true);
       const point = pointAt("ext");
       if (point) setCursor(point);
     });
 
-    // Click the extension icon — popup opens.
-    schedule(4100, () => {
+    // Cursor arrives near ext icon — click it, popup opens.
+    schedule(3300, () => {
       click();
       setPhase("enabling");
     });
 
-    // Cursor drifts to the toggle.
-    schedule(4350, () => {
+    // Cursor lags to the toggle button.
+    schedule(3350, () => {
       const point = pointAt("toggle");
       if (point) setCursor(point);
     });
 
     // Click the toggle — extension enabled.
-    schedule(5050, () => {
+    schedule(4050, () => {
       click();
       setEnabled(true);
     });
 
-    // Cursor fades, smooth animation phase begins.
-    schedule(5250, () => {
+    // Smooth animation phase — cursor drifts to center-bottom.
+    schedule(4200, () => {
       setPhase("boosted");
+      setCursor({ x: 50, y: 82 });
+    });
+
+    // Cursor disappears.
+    schedule(4700, () => {
       setCursorVisible(false);
     });
 
-    // After 3 smooth cycles (3.6s), hand control to the visitor.
-    schedule(8850, () => {
+    // After smooth scroll cycles finish, hand control to the visitor.
+    schedule(8100, () => {
       setPhase("ready");
-      setFinished(true);
     });
   }, [clearTimers]);
 
@@ -147,11 +146,6 @@ export default function HowItWorks() {
                 <RotateCcw size={18} strokeWidth={2} />
                 Play again
               </Button>
-            )}
-            {finished && (
-              <p className={styles.hint}>
-                The window above is live. Scroll it and use Load older messages.
-              </p>
             )}
           </div>
         </div>
