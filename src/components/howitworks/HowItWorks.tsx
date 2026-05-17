@@ -5,11 +5,7 @@ import SafariFrame from "./SafariFrame";
 import type { Phase } from "./types";
 import styles from "./HowItWorks.module.scss";
 
-const cursorSpots = {
-  start: { x: 24, y: 70 },
-  extension: { x: 93, y: 13 },
-  toggle: { x: 85, y: 36 },
-};
+const startPoint = { x: 24, y: 74 };
 
 const captions: Record<Phase, string> = {
   idle: "A long conversation, before and after the booster. Press play to watch.",
@@ -24,12 +20,13 @@ function reducedMotion() {
 
 export default function HowItWorks() {
   const [phase, setPhase] = useState<Phase>("idle");
-  const [cursor, setCursor] = useState(cursorSpots.start);
+  const [cursor, setCursor] = useState(startPoint);
   const [cursorVisible, setCursorVisible] = useState(true);
   const [enabled, setEnabled] = useState(false);
   const [clicking, setClicking] = useState(false);
   const [finished, setFinished] = useState(false);
 
+  const demoRef = useRef<HTMLDivElement>(null);
   const timers = useRef<number[]>([]);
 
   const clearTimers = useCallback(() => {
@@ -48,6 +45,22 @@ export default function HowItWorks() {
     schedule(360, () => setClicking(false));
   };
 
+  // Measures a marked element and returns its centre as a percentage of the
+  // browser frame, so the cursor lands exactly on it at any size.
+  const pointAt = (name: "ext" | "toggle") => {
+    const root = demoRef.current;
+    if (!root) return null;
+    const frame = root.querySelector('[data-demo="frame"]');
+    const target = root.querySelector(`[data-demo="${name}"]`);
+    if (!frame || !target) return null;
+    const f = frame.getBoundingClientRect();
+    const t = target.getBoundingClientRect();
+    return {
+      x: ((t.left + t.width / 2 - f.left) / f.width) * 100,
+      y: ((t.top + t.height / 2 - f.top) / f.height) * 100,
+    };
+  };
+
   const play = useCallback(() => {
     clearTimers();
     setFinished(false);
@@ -62,20 +75,31 @@ export default function HowItWorks() {
     }
 
     setCursorVisible(true);
-    setCursor(cursorSpots.start);
+    setCursor(startPoint);
     setPhase("lagging");
-    schedule(60, () => setCursor(cursorSpots.extension));
 
+    // Drift jankily towards the extension icon.
+    schedule(60, () => {
+      const point = pointAt("ext");
+      if (point) setCursor(point);
+    });
+
+    // Open the popup, then move to its toggle.
     schedule(3400, () => {
       click();
       setPhase("enabling");
-      setCursor(cursorSpots.toggle);
     });
-    schedule(4200, () => {
+    schedule(3540, () => {
+      const point = pointAt("toggle");
+      if (point) setCursor(point);
+    });
+    schedule(4300, () => {
       click();
       setEnabled(true);
     });
-    schedule(5000, () => {
+
+    // Hand control back to the visitor.
+    schedule(5100, () => {
       setPhase("ready");
       setCursorVisible(false);
       setFinished(true);
@@ -93,7 +117,7 @@ export default function HowItWorks() {
           extension is switched on.
         </p>
 
-        <div className={styles.demo}>
+        <div className={styles.demo} ref={demoRef}>
           <SafariFrame
             phase={phase}
             enabled={enabled}

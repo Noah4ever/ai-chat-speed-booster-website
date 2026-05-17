@@ -18,6 +18,7 @@
 .buttons {
   margin-top: var(--space-8);
   display: flex;
+  align-items: center;
   flex-wrap: wrap;
   gap: var(--space-3);
 }

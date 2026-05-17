@@ -20,7 +20,7 @@ export default function SafariFrame({
   clicking,
 }: SafariFrameProps) {
   return (
-    <div className={styles.frame}>
+    <div className={styles.frame} data-demo="frame">
       <div className={styles.toolbar}>
         <span className={styles.dots} aria-hidden="true">
           <i />
@@ -33,13 +33,12 @@ export default function SafariFrame({
           chatgpt.com
         </span>
 
-        <button
+        <span
           className={enabled ? `${styles.extButton} ${styles.extOn}` : styles.extButton}
-          aria-hidden="true"
-          tabIndex={-1}
+          data-demo="ext"
         >
           <img src={extensionIcon} alt="" width={18} height={18} />
-        </button>
+        </span>
       </div>
 
       <div className={styles.viewport}>
@@ -53,24 +52,27 @@ export default function SafariFrame({
             </div>
             <div className={styles.popupRow}>
               <span>Enabled</span>
-              <span className={enabled ? `${styles.toggle} ${styles.toggleOn}` : styles.toggle}>
+              <span
+                className={enabled ? `${styles.toggle} ${styles.toggleOn}` : styles.toggle}
+                data-demo="toggle"
+              >
                 <span className={styles.knob} />
               </span>
             </div>
           </div>
         )}
-
-        {cursorVisible && (
-          <div
-            className={`${styles.cursor} ${styles[`cursor_${phase}`]}`}
-            style={{ left: `${cursor.x}%`, top: `${cursor.y}%` }}
-            aria-hidden="true"
-          >
-            {clicking && <span className={styles.clickRing} />}
-            <MousePointer2 size={22} fill="#fff" color="#1d1d1f" strokeWidth={1.5} />
-          </div>
-        )}
       </div>
+
+      {cursorVisible && (
+        <div
+          className={`${styles.cursor} ${styles[`cursor_${phase}`]}`}
+          style={{ left: `${cursor.x}%`, top: `${cursor.y}%` }}
+          aria-hidden="true"
+        >
+          {clicking && <span className={styles.clickRing} />}
+          <MousePointer2 size={22} fill="#fff" color="#1d1d1f" strokeWidth={1.5} />
+        </div>
+      )}
     </div>
   );
 }

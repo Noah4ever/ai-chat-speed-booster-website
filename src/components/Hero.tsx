@@ -1,41 +1,58 @@
+import { useState } from "react";
 import Button from "./Button";
 import BrowserMark from "./BrowserMark";
+import { detectBrowser } from "../lib/browser";
 import { links, section } from "../lib/links";
 import styles from "./Hero.module.scss";
 
 export default function Hero() {
+  const [browser] = useState(detectBrowser);
+  const firefoxFirst = browser === "firefox";
+
+  const chrome = (
+    <Button
+      key="chrome"
+      href={links.chrome}
+      external
+      size="lg"
+      variant={firefoxFirst ? "secondary" : "primary"}
+    >
+      <BrowserMark browser="chrome" size={20} />
+      Add to Chrome
+    </Button>
+  );
+
+  const firefox = (
+    <Button
+      key="firefox"
+      href={links.firefox}
+      external
+      size="lg"
+      variant={firefoxFirst ? "primary" : "secondary"}
+    >
+      <BrowserMark browser="firefox" size={20} />
+      Add to Firefox
+    </Button>
+  );
+
   return (
     <section className={styles.hero}>
       <div className="container">
-        <p className="eyebrow">Browser extension</p>
-
-        <h1 className={styles.headline}>Long AI chats stay fast.</h1>
+        <h1 className={styles.headline}>Make your AI chats feel fast again.</h1>
 
         <p className={styles.sub}>
-          ChatGPT, Claude and Gemini slow down once a conversation gets long,
-          because the page keeps redrawing every message you have ever sent.
-          AI Chat Speed Booster shows only the recent ones and loads the rest
-          when you ask for them.
+          ChatGPT, Claude and Gemini get slower the longer a chat runs. AI Chat
+          Speed Booster keeps only your recent messages on screen, so the page
+          stays quick however far back the conversation goes.
         </p>
 
         <div className={styles.actions}>
-          <Button href={links.chrome} external size="lg">
-            <BrowserMark browser="chrome" size={20} />
-            Add to Chrome
-          </Button>
-          <Button href={links.firefox} external size="lg" variant="secondary">
-            <BrowserMark browser="firefox" size={20} />
-            Add to Firefox
-          </Button>
+          {firefoxFirst ? [firefox, chrome] : [chrome, firefox]}
         </div>
 
-        <p className={styles.meta}>
-          <a href={section("install")}>Also for Edge and Safari</a>
-          <span aria-hidden="true">·</span>
-          Free and open source
-          <span aria-hidden="true">·</span>
-          No tracking
-        </p>
+        <a className={styles.more} href={section("install")}>
+          Also for Edge and Safari
+        </a>
       </div>
     </section>
   );

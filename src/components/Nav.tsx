@@ -1,20 +1,23 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import Logo from "./Logo";
+import GithubIcon from "./GithubIcon";
 import { links, section } from "../lib/links";
 import styles from "./Nav.module.scss";
 
 const navItems = [
-  { href: section("how"), label: "How it works" },
-  { href: section("features"), label: "Features" },
-  { href: section("install"), label: "Install" },
-  { href: section("open-source"), label: "Open source" },
+  { id: "how", label: "How it works" },
+  { id: "features", label: "Features" },
+  { id: "install", label: "Install" },
+  { id: "open-source", label: "Open source" },
 ];
 
 export default function Nav() {
+  const { pathname } = useLocation();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [activeId, setActiveId] = useState("");
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 4);
@@ -22,6 +25,24 @@ export default function Nav() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  // Highlight the section currently in view.
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) setActiveId(entry.target.id);
+        });
+      },
+      { rootMargin: "-45% 0px -50% 0px" },
+    );
+
+    navItems.forEach(({ id }) => {
+      const element = document.getElementById(id);
+      if (element) observer.observe(element);
+    });
+    return () => observer.disconnect();
+  }, [pathname]);
 
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
@@ -39,7 +60,11 @@ export default function Nav() {
 
         <nav className={styles.links} aria-label="Primary">
           {navItems.map((item) => (
-            <a key={item.label} href={item.href}>
+            <a
+              key={item.id}
+              href={section(item.id)}
+              className={activeId === item.id ? styles.active : undefined}
+            >
               {item.label}
             </a>
           ))}
@@ -48,8 +73,9 @@ export default function Nav() {
             target="_blank"
             rel="noreferrer noopener"
             className={styles.github}
+            aria-label="GitHub repository"
           >
-            GitHub
+            <GithubIcon size={20} />
           </a>
         </nav>
 
@@ -66,7 +92,7 @@ export default function Nav() {
       {menuOpen && (
         <div className={styles.menu}>
           {navItems.map((item) => (
-            <a key={item.label} href={item.href} onClick={() => setMenuOpen(false)}>
+            <a key={item.id} href={section(item.id)} onClick={() => setMenuOpen(false)}>
               {item.label}
             </a>
           ))}

@@ -30,8 +30,9 @@
   gap: var(--space-6);
 
   a {
+    position: relative;
     color: var(--text-muted);
-    transition: color 0.15s var(--ease);
+    transition: color 0.2s var(--ease);
 
     &:hover {
       color: var(--text);
@@ -39,9 +40,36 @@
   }
 }
 
-// GitHub sits with the other links; no extra styling needed.
+// Sliding underline that marks the section in view.
+.links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -6px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.25s var(--ease);
+}
+
+.active {
+  color: var(--text);
+}
+
+.active::after {
+  transform: scaleX(1);
+}
+
 .github {
-  font-weight: 500;
+  display: inline-flex;
+  color: var(--text-muted);
+
+  &::after {
+    display: none;
+  }
 }
 
 .menuButton {

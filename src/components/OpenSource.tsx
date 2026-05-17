@@ -1,5 +1,7 @@
 import { ArrowUpRight, Check } from "lucide-react";
 import Button from "./Button";
+import GithubIcon from "./GithubIcon";
+import GithubStars from "./GithubStars";
 import { links } from "../lib/links";
 import styles from "./OpenSource.module.scss";
 
@@ -23,17 +25,20 @@ export default function OpenSource() {
               it. AI Chat Speed Booster is open source under the MIT license,
               free to use and free to inspect.
             </p>
+
             <div className={styles.buttons}>
               <Button href={links.github} external size="lg">
+                <GithubIcon size={18} />
                 View on GitHub
-                <ArrowUpRight size={18} strokeWidth={2} />
               </Button>
               <Button href={links.releases} external size="lg" variant="secondary">
                 Releases
               </Button>
-              <Button href={links.issues} external size="lg" variant="ghost">
+              <Button href={links.issues} external size="lg" variant="secondary">
                 Report an issue
+                <ArrowUpRight size={17} strokeWidth={2} />
               </Button>
+              <GithubStars />
             </div>
           </div>
 

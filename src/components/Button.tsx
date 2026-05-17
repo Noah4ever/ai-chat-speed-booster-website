@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import styles from "./Button.module.scss";
 
-type Variant = "primary" | "secondary" | "ghost";
+type Variant = "primary" | "secondary";
 type Size = "md" | "lg";
 
 interface ButtonProps {

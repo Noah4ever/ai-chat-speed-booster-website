@@ -36,22 +36,22 @@ const groups: FeatureGroup[] = [
       {
         icon: Layers,
         title: "Recent messages first",
-        body: "The page renders only your latest turns, three by default, so the browser stops redrawing the whole history on every scroll.",
+        body: "Renders your latest turns, not the whole history.",
       },
       {
         icon: Zap,
         title: "Fast mode",
-        body: "Trims the conversation inside the network response before the app renders it, which is quicker than hiding messages afterwards.",
+        body: "Trims the chat in the network response, before render.",
       },
       {
         icon: EyeOff,
         title: "Hide old turns",
-        body: "Removes older turns from the page beyond the visible limit. You can switch it off per site if a page renders better on its own.",
+        body: "Drops older turns past the visible limit.",
       },
       {
         icon: Database,
         title: "Recent chat cache",
-        body: "Keeps your five most recent conversations cached so switching between chats stays quick.",
+        body: "Caches your last five chats for quick switching.",
       },
     ],
   },
@@ -61,33 +61,33 @@ const groups: FeatureGroup[] = [
       {
         icon: ArrowUpToLine,
         title: "Load more on demand",
-        body: "A button at the top of the thread brings back older messages in batches, whenever you want them.",
+        body: "Brings older messages back in batches.",
       },
       {
         icon: InfinityIcon,
         title: "Auto load",
-        body: "Brings back one older message as you reach the top of the thread, with no clicking.",
+        body: "Reveals one older message as you reach the top.",
         tag: "Beta",
       },
       {
         icon: SlidersHorizontal,
         title: "Adjustable limits",
-        body: "Choose how many messages stay visible (1 to 200) and how many each load reveals (1 to 50).",
+        body: "Set how many messages stay visible.",
       },
       {
         icon: Tag,
-        title: "On-page status badge",
-        body: "A small badge shows how many turns are hidden versus visible. Put it in any corner, or hide it.",
+        title: "Status badge",
+        body: "A corner badge shows hidden versus visible turns.",
       },
       {
         icon: Gauge,
-        title: "Weekly request counter",
-        body: "Counts the messages you send each week and resets on Monday. Set a limit to match your plan.",
+        title: "Request counter",
+        body: "Counts the messages you send each week.",
       },
       {
         icon: SunMoon,
         title: "Light and dark popup",
-        body: "The settings popup has a clean light and dark theme you can switch with one tap.",
+        body: "The settings popup has both themes.",
       },
     ],
   },
@@ -97,22 +97,22 @@ const groups: FeatureGroup[] = [
       {
         icon: Globe,
         title: "Multi-site support",
-        body: "Tested on ChatGPT, Claude and Gemini. Other AI chats can be added with one entry in a config file.",
+        body: "ChatGPT, Claude, Gemini, and more you can add.",
       },
       {
         icon: AppWindow,
         title: "Every major browser",
-        body: "Built for Chrome, Firefox and Edge, with a build-it-yourself path for Safari.",
+        body: "Chrome, Firefox, Edge, and Safari.",
       },
       {
         icon: ShieldCheck,
         title: "Private by design",
-        body: "No message content is read or sent anywhere. No analytics, no tracking. Settings stay in your browser.",
+        body: "No message content read, no tracking.",
       },
       {
         icon: Code,
         title: "Open source",
-        body: "The whole extension is on GitHub under the MIT license, so anyone can read or audit it.",
+        body: "MIT licensed and public on GitHub.",
       },
     ],
   },
@@ -130,11 +130,11 @@ export default function Features() {
             <h3 className={styles.groupName}>{group.name}</h3>
             <div className={styles.grid}>
               {group.features.map((feature) => (
-                <div key={feature.title} className={styles.feature}>
+                <div key={feature.title} className={styles.card}>
                   <feature.icon
                     className={styles.icon}
-                    size={22}
-                    strokeWidth={1.6}
+                    size={20}
+                    strokeWidth={1.7}
                     aria-hidden="true"
                   />
                   <h4 className={styles.title}>
