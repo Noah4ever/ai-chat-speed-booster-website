@@ -28,7 +28,7 @@ export default function OpenSource() {
 
             <div className={styles.actions}>
               <Button href={links.github} external size="lg">
-                <GithubIcon size={22} />
+                <GithubIcon size={26} />
                 View on GitHub
               </Button>
 

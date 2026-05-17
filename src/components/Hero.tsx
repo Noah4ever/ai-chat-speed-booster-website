@@ -12,12 +12,12 @@ export default function Hero() {
 
   const mainButton = isFirefox ? (
     <Button href={links.firefox} external size="lg" variant="primary">
-      <BrowserMark browser="firefox" size={24} />
+      <BrowserMark browser="firefox" size={28} />
       Add to Firefox
     </Button>
   ) : (
     <Button href={links.chrome} external size="lg" variant="primary">
-      <BrowserMark browser="chrome" size={24} />
+      <BrowserMark browser="chrome" size={28} />
       Add to Chrome
     </Button>
   );

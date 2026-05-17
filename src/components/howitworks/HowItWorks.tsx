@@ -142,12 +142,12 @@ export default function HowItWorks() {
             <p className={styles.caption}>{captions[phase]}</p>
             {phase === "idle" ? (
               <Button size="lg" onClick={play}>
-                <Play size={22} fill="currentColor" strokeWidth={0} />
+                <Play size={26} fill="currentColor" strokeWidth={0} />
                 See how it works
               </Button>
             ) : (
               <Button size="lg" variant="secondary" onClick={play}>
-                <RotateCcw size={22} strokeWidth={2} />
+                <RotateCcw size={26} strokeWidth={2} />
                 Play again
               </Button>
             )}
