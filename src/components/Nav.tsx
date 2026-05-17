@@ -28,11 +28,20 @@ export default function Nav() {
 
   // Highlight the section currently in view.
   useEffect(() => {
+    const visible = new Set<string>();
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) setActiveId(entry.target.id);
+          if (entry.isIntersecting) {
+            visible.add(entry.target.id);
+          } else {
+            visible.delete(entry.target.id);
+          }
         });
+        // Pick the topmost visible section (first in navItems order).
+        const top = navItems.find(({ id }) => visible.has(id));
+        if (top) setActiveId(top.id);
       },
       { rootMargin: "-20% 0px -35% 0px" },
     );
