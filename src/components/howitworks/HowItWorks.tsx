@@ -19,7 +19,7 @@ function reducedMotion() {
 
 export default function HowItWorks() {
   const [phase, setPhase] = useState<Phase>("idle");
-  const [cursor, setCursor] = useState({ x: 48, y: 66 });
+  const [cursor, setCursor] = useState({ x: 50, y: 88 });
   const [cursorVisible, setCursorVisible] = useState(false);
   const [enabled, setEnabled] = useState(false);
   const [clicking, setClicking] = useState(false);
@@ -69,12 +69,16 @@ export default function HowItWorks() {
     }
 
     setCursorVisible(false);
-    setCursor({ x: 48, y: 66 });
+    setCursor({ x: 50, y: 88 });
     setPhase("lagging");
 
-    // 50 ms after first render: cursor appears and starts lagging toward the ext icon.
+    // 50 ms: cursor appears at center-bottom of the frame.
     schedule(50, () => {
       setCursorVisible(true);
+    });
+
+    // 100 ms: cursor begins lagging toward the ext icon (3.2 s steps transition).
+    schedule(100, () => {
       const point = pointAt("ext");
       if (point) setCursor(point);
     });
