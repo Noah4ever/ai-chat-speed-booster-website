@@ -72,10 +72,12 @@ export default function DemoChat({ phase }: { phase: Phase }) {
         {allLoaded ? (
           <p className={styles.startMarker}>Start of the conversation</p>
         ) : (
-          <button className={styles.loadOlder} onClick={loadOlder}>
-            <ChevronUp size={16} strokeWidth={2} />
-            Load older messages
-          </button>
+          <div className={styles.loadOlderBar}>
+            <button className={styles.loadOlderBtn} onClick={loadOlder}>
+              <ChevronUp size={14} strokeWidth={2.5} />
+              Load {loadStep} more ({conversation.length - count} hidden)
+            </button>
+          </div>
         )}
         {shown.map((message) => (
           <Bubble key={message.id} {...message} />

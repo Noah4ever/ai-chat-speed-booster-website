@@ -233,18 +233,34 @@
   opacity: 0.45;
 }
 
-.loadOlder {
+.loadOlderBar {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  margin: 0 auto var(--space-2);
-  padding: 7px 15px;
+  padding: var(--space-2) var(--space-4);
+  background: var(--bg-subtle);
+  border-bottom: 1px solid var(--border);
+  margin-bottom: var(--space-2);
+}
+
+.loadOlderBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 13px;
   border-radius: var(--radius-pill);
-  background: var(--accent-soft);
-  color: var(--accent);
+  border: 1px solid var(--border-strong);
+  background: transparent;
+  color: var(--text-muted);
   font-size: var(--text-sm);
-  font-weight: 600;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s var(--ease), color 0.15s var(--ease);
+
+  &:hover {
+    background: var(--border);
+    color: var(--text);
+  }
 }
 
 .startMarker {
