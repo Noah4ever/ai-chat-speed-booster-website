@@ -1,4 +1,4 @@
-export type Phase = "idle" | "lagging" | "enabling" | "ready";
+export type Phase = "idle" | "lagging" | "enabling" | "boosted" | "ready";
 
 export interface ChatMessage {
   id: number;

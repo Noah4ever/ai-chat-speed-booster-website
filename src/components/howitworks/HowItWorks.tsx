@@ -9,9 +9,10 @@ const startPoint = { x: 24, y: 74 };
 
 const captions: Record<Phase, string> = {
   idle: "A long conversation, before and after the booster. Press play to watch.",
-  lagging: "Scrolling lags because the page keeps redrawing every message in the thread.",
-  enabling: "The cursor turns AI Chat Speed Booster on.",
-  ready: "Scrolling is smooth again. Scroll up inside the window and load older messages yourself.",
+  lagging: "Without the extension — scrolling stutters because the browser redraws every message.",
+  enabling: "One click. The extension toggle turns on.",
+  boosted: "With the extension — the same chat, now scrolling smoothly.",
+  ready: "Try it yourself. Scroll inside the window and load older messages.",
 };
 
 function reducedMotion() {
@@ -76,31 +77,40 @@ export default function HowItWorks() {
     setCursor(startPoint);
     setPhase("lagging");
 
-    // After the 3 scroll cycles (5.4s), show the cursor and move to the extension icon.
-    schedule(5400, () => {
+    // After the choppy lag animation (~3.2s), cursor appears and moves to the ext icon.
+    schedule(3300, () => {
       setCursorVisible(true);
       const point = pointAt("ext");
       if (point) setCursor(point);
     });
 
-    // Open the popup, then move to its toggle.
-    schedule(6200, () => {
+    // Click the extension icon — popup opens.
+    schedule(4100, () => {
       click();
       setPhase("enabling");
     });
-    schedule(6340, () => {
+
+    // Cursor drifts to the toggle.
+    schedule(4350, () => {
       const point = pointAt("toggle");
       if (point) setCursor(point);
     });
-    schedule(7100, () => {
+
+    // Click the toggle — extension enabled.
+    schedule(5050, () => {
       click();
       setEnabled(true);
     });
 
-    // Hand control back to the visitor.
-    schedule(7900, () => {
-      setPhase("ready");
+    // Cursor fades, smooth animation phase begins.
+    schedule(5250, () => {
+      setPhase("boosted");
       setCursorVisible(false);
+    });
+
+    // After 3 smooth cycles (3.6s), hand control to the visitor.
+    schedule(8850, () => {
+      setPhase("ready");
       setFinished(true);
     });
   }, [clearTimers]);

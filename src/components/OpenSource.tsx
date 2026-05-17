@@ -1,4 +1,4 @@
-import { ArrowUpRight, Check } from "lucide-react";
+import { Check } from "lucide-react";
 import Button from "./Button";
 import GithubIcon from "./GithubIcon";
 import GithubStars from "./GithubStars";
@@ -26,19 +26,23 @@ export default function OpenSource() {
               free to use and free to inspect.
             </p>
 
-            <div className={styles.buttons}>
+            <div className={styles.actions}>
               <Button href={links.github} external size="lg">
                 <GithubIcon size={18} />
                 View on GitHub
               </Button>
-              <Button href={links.releases} external size="lg" variant="secondary">
-                Releases
-              </Button>
-              <Button href={links.issues} external size="lg" variant="secondary">
-                Report an issue
-                <ArrowUpRight size={17} strokeWidth={2} />
-              </Button>
-              <GithubStars />
+
+              <div className={styles.meta}>
+                <GithubStars />
+                <span className={styles.dot} aria-hidden="true">·</span>
+                <a href={links.releases} target="_blank" rel="noreferrer noopener">
+                  Releases
+                </a>
+                <span className={styles.dot} aria-hidden="true">·</span>
+                <a href={links.issues} target="_blank" rel="noreferrer noopener">
+                  Report an issue
+                </a>
+              </div>
             </div>
           </div>
 

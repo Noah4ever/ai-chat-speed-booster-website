@@ -45,15 +45,16 @@ export default function DemoChat({ phase }: { phase: Phase }) {
   }
 
   if (!live) {
+    const streamClass =
+      phase === "lagging"
+        ? `${styles.stream} ${styles.streamLagging}`
+        : phase === "boosted"
+          ? `${styles.stream} ${styles.streamBoosted}`
+          : styles.stream;
+
     return (
       <div className={styles.chatStatic}>
-        <div
-          className={
-            phase === "lagging"
-              ? `${styles.stream} ${styles.streamLagging}`
-              : styles.stream
-          }
-        >
+        <div className={streamClass}>
           {staticSlice.map((message) => (
             <Bubble key={message.id} {...message} />
           ))}

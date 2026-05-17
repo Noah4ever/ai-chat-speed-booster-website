@@ -8,8 +8,6 @@ function format(count: number): string {
   return String(count);
 }
 
-// Live star count for the extension repo. Renders nothing until the count
-// loads, and stays hidden if the GitHub API is unreachable.
 export default function GithubStars() {
   const [stars, setStars] = useState<number | null>(null);
 
@@ -32,14 +30,13 @@ export default function GithubStars() {
 
   return (
     <a
-      className={styles.stars}
+      className={styles.stat}
       href={`${links.github}/stargazers`}
       target="_blank"
       rel="noreferrer noopener"
     >
-      <Star size={15} strokeWidth={2} fill="currentColor" />
-      {format(stars)}
-      <span className={styles.word}>on GitHub</span>
+      <Star size={13} strokeWidth={0} fill="currentColor" />
+      {format(stars)} stars
     </a>
   );
 }

@@ -167,17 +167,26 @@
 }
 
 .streamLagging {
-  animation: lagScroll 5.4s ease-in-out forwards;
+  animation: lagScroll 3.2s steps(10, jump-none) 1 forwards;
 }
 
 @keyframes lagScroll {
-  0%     { transform: translateY(0); }
-  16.67% { transform: translateY(140px); }
-  33.33% { transform: translateY(0); }
-  50%    { transform: translateY(140px); }
-  66.67% { transform: translateY(0); }
-  83.33% { transform: translateY(140px); }
-  100%   { transform: translateY(0); }
+  0%   { transform: translateY(0); }
+  100% { transform: translateY(180px); }
+}
+
+.streamBoosted {
+  animation: smoothScroll 3.6s linear 1 forwards;
+}
+
+@keyframes smoothScroll {
+  0%    { transform: translateY(0);     animation-timing-function: ease-in-out; }
+  16.7% { transform: translateY(160px); animation-timing-function: ease-in-out; }
+  33.3% { transform: translateY(0);     animation-timing-function: ease-in-out; }
+  50%   { transform: translateY(160px); animation-timing-function: ease-in-out; }
+  66.7% { transform: translateY(0);     animation-timing-function: ease-in-out; }
+  83.3% { transform: translateY(160px); animation-timing-function: ease-in-out; }
+  100%  { transform: translateY(0); }
 }
 
 .rowUser {
