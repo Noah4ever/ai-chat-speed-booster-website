@@ -22,10 +22,10 @@
   // Button tokens — change these to restyle every button at once
   --btn-radius: var(--radius-pill);
   --btn-weight: 600;
-  --btn-primary-bg: #1a55e8;
-  --btn-primary-bg-hover: #1448d0;
+  --btn-primary-bg: #111827;
+  --btn-primary-bg-hover: #1e293b;
   --btn-primary-fg: #ffffff;
-  --btn-primary-shadow: 0 1px 2px rgba(26, 85, 232, 0.25), 0 4px 12px rgba(26, 85, 232, 0.18);
+  --btn-primary-shadow: none;
   --btn-secondary-bg: var(--surface);
   --btn-secondary-bg-hover: var(--bg-subtle);
   --btn-secondary-fg: var(--text);
@@ -79,9 +79,10 @@
     --warn: #f59e6b;
 
     // Button tokens (dark)
-    --btn-primary-bg: #3d72f5;
-    --btn-primary-bg-hover: #5585ff;
-    --btn-primary-shadow: 0 1px 2px rgba(61, 114, 245, 0.3), 0 4px 14px rgba(61, 114, 245, 0.22);
+    --btn-primary-bg: #f8fafc;
+    --btn-primary-bg-hover: #e2e8f0;
+    --btn-primary-fg: #0f172a;
+    --btn-primary-shadow: none;
     --btn-secondary-bg-hover: rgba(255, 255, 255, 0.06);
 
     --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 14px 36px rgba(0, 0, 0, 0.5);
