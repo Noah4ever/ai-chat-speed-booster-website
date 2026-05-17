@@ -1,0 +1,83 @@
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 1px solid transparent;
+  transition: background 0.25s var(--ease), border-color 0.25s var(--ease);
+}
+
+.scrolled {
+  background: var(--nav-bg);
+  backdrop-filter: saturate(180%) blur(18px);
+  -webkit-backdrop-filter: saturate(180%) blur(18px);
+  border-bottom-color: var(--border);
+}
+
+.bar {
+  width: 100%;
+  max-width: var(--maxw);
+  margin-inline: auto;
+  height: 56px;
+  padding-inline: var(--space-6);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.links {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+
+  a {
+    color: var(--text-muted);
+    transition: color 0.15s var(--ease);
+
+    &:hover {
+      color: var(--text);
+    }
+  }
+}
+
+// GitHub sits with the other links; no extra styling needed.
+.github {
+  font-weight: 500;
+}
+
+.menuButton {
+  display: none;
+  color: var(--text);
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-2) var(--space-4) var(--space-6);
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+
+  a {
+    padding: var(--space-4) var(--space-2);
+    font-weight: 500;
+    border-bottom: 1px solid var(--border);
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+}
+
+@media (max-width: 760px) {
+  .links {
+    display: none;
+  }
+  .menuButton {
+    display: inline-flex;
+  }
+}
+
+@media (min-width: 761px) {
+  .menu {
+    display: none;
+  }
+}
