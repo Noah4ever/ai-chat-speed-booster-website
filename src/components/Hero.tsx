@@ -1,39 +1,32 @@
-import { useState } from "react";
 import Button from "./Button";
 import BrowserMark from "./BrowserMark";
 import { detectBrowser } from "../lib/browser";
 import { links, section } from "../lib/links";
 import styles from "./Hero.module.scss";
 
-export default function Hero() {
-  const [browser] = useState(detectBrowser);
-  const firefoxFirst = browser === "firefox";
+const browser = detectBrowser();
 
-  const chrome = (
-    <Button
-      key="chrome"
-      href={links.chrome}
-      external
-      size="lg"
-      variant={firefoxFirst ? "secondary" : "primary"}
-    >
+export default function Hero() {
+  const isFirefox = browser === "firefox";
+  const isChrome = browser === "chrome" || browser === "edge";
+
+  const mainButton = isFirefox ? (
+    <Button href={links.firefox} external size="lg" variant="primary">
+      <BrowserMark browser="firefox" size={20} />
+      Add to Firefox
+    </Button>
+  ) : (
+    <Button href={links.chrome} external size="lg" variant="primary">
       <BrowserMark browser="chrome" size={20} />
       Add to Chrome
     </Button>
   );
 
-  const firefox = (
-    <Button
-      key="firefox"
-      href={links.firefox}
-      external
-      size="lg"
-      variant={firefoxFirst ? "primary" : "secondary"}
-    >
-      <BrowserMark browser="firefox" size={20} />
-      Add to Firefox
-    </Button>
-  );
+  const otherBrowsersLabel = isFirefox
+    ? "Also for Chrome, Edge and Safari"
+    : isChrome
+      ? "Also for Firefox and Safari"
+      : "Available for Chrome, Firefox, Edge and Safari";
 
   return (
     <section className={styles.hero}>
@@ -47,11 +40,11 @@ export default function Hero() {
         </p>
 
         <div className={styles.actions}>
-          {firefoxFirst ? [firefox, chrome] : [chrome, firefox]}
+          {mainButton}
         </div>
 
         <a className={styles.more} href={section("install")}>
-          Also for Edge and Safari
+          {otherBrowsersLabel}
         </a>
       </div>
     </section>
