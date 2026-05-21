@@ -6,7 +6,7 @@ import type { Phase } from "./types";
 import styles from "./HowItWorks.module.scss";
 
 const captions: Record<Phase, string> = {
-  idle: "A long conversation, before and after the booster. Press play to watch.",
+  idle: "Watch a real ChatGPT chat go from laggy to smooth. Plays right in the window.",
   lagging: "Without the extension, scrolling stutters because the browser redraws every message.",
   enabling: "One click. The extension toggle turns on.",
   boosted: "With the extension enabled, the same chat scrolls smoothly.",
@@ -142,8 +142,8 @@ export default function HowItWorks() {
             <p className={styles.caption}>{captions[phase]}</p>
             {phase === "idle" ? (
               <Button size="lg" onClick={play}>
-                <Play size={26} fill="currentColor" strokeWidth={0} />
-                See how it works
+                <Play size={22} fill="currentColor" strokeWidth={0} />
+                Play the live demo
               </Button>
             ) : (
               <Button size="lg" variant="secondary" onClick={play}>

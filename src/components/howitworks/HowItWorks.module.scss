@@ -33,12 +33,14 @@
   color: var(--text-muted);
 }
 
+
 @media (max-width: 860px) {
   .demo {
     grid-template-columns: 1fr;
     gap: var(--space-8);
   }
   .panel {
+    order: -1;
     align-items: center;
     text-align: center;
   }
