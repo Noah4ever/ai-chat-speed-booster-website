@@ -44,7 +44,7 @@ const reviews: Review[] = [
 
 function Stars({ count }: { count: number }) {
   return (
-    <span className={styles.stars} aria-label={`${count} out of 5 stars`}>
+    <span className={styles.stars} role="img" aria-label={`${count} out of 5 stars`}>
       {Array.from({ length: 5 }, (_, i) => (
         <Star
           key={i}
