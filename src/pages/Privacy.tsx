@@ -17,8 +17,8 @@ export default function Privacy() {
         <p className="eyebrow">Privacy policy</p>
         <h1 className={styles.title}>Your privacy.</h1>
         <p className={styles.lead}>
-          This policy explains what happens — and what does not happen — with
-          your data when you visit this website. Last updated {UPDATED}.
+          This policy explains what happens to your data when you visit this
+          website. Last updated {UPDATED}.
         </p>
 
         <article className={styles.doc}>
@@ -32,7 +32,7 @@ export default function Privacy() {
 
           <h2>What this policy covers</h2>
           <p>
-            This policy applies to the AI Chat Speed Booster website — the page
+            This policy applies to the AI Chat Speed Booster website, the page
             you are reading now. The AI Chat Speed Booster browser extension is
             a separate program with its own behavior; see{" "}
             <strong>The browser extension</strong> below.
@@ -57,8 +57,8 @@ export default function Privacy() {
           <ul>
             <li>the page visited and the referring link</li>
             <li>
-              approximate location (country), derived from your IP address —
-              the IP address itself is not stored
+              approximate location (country), derived from your IP address
+              (the IP address itself is not stored)
             </li>
             <li>browser, operating system, device type, and screen size</li>
           </ul>
@@ -80,8 +80,8 @@ export default function Privacy() {
             </li>
           </ul>
           <p>
-            When this happens, GitHub receives a normal web request — including
-            your IP address — under{" "}
+            When this happens, GitHub receives a normal web request, including
+            your IP address, under{" "}
             <a
               href="https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement"
               target="_blank"
