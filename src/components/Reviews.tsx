@@ -1,4 +1,6 @@
 import { Star } from "lucide-react";
+import Button from "./Button";
+import { links } from "../lib/links";
 import styles from "./Reviews.module.scss";
 
 interface Review {
@@ -90,7 +92,7 @@ export default function Reviews() {
           <span className={styles.divider} aria-hidden="true" />
           <span className={styles.meta}>2,000 users</span>
           <a
-            href="https://chromewebstore.google.com/detail/ai-chat-speed-booster/fgefgkfmapdjjjdekejanelknedclfik/reviews"
+            href={links.chromeReviews}
             target="_blank"
             rel="noreferrer noopener"
             className={styles.storeLink}
@@ -112,6 +114,12 @@ export default function Reviews() {
               <p className={styles.reviewText}>{review.text}</p>
             </div>
           ))}
+        </div>
+
+        <div className={styles.more}>
+          <Button href={links.chromeReviews} external size="lg" variant="secondary">
+            Read them all
+          </Button>
         </div>
       </div>
     </section>

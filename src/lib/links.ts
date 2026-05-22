@@ -1,10 +1,12 @@
 // Every external link the site points at, kept in one place.
 
 const repo = "https://github.com/Noah4ever/ai-chat-speed-booster";
+const chromeStore =
+  "https://chromewebstore.google.com/detail/ai-chat-speed-booster/fgefgkfmapdjjjdekejanelknedclfik";
 
 export const links = {
-  chrome:
-    "https://chromewebstore.google.com/detail/ai-chat-speed-booster/fgefgkfmapdjjjdekejanelknedclfik",
+  chrome: chromeStore,
+  chromeReviews: `${chromeStore}/reviews`,
   firefox: "https://addons.mozilla.org/en-US/firefox/addon/ai-chat-speed-booster/",
   github: repo,
   issues: `${repo}/issues`,

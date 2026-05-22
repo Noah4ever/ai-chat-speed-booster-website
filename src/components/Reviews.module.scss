@@ -119,6 +119,12 @@
   flex: 1;
 }
 
+.more {
+  margin-top: var(--space-8);
+  display: flex;
+  justify-content: center;
+}
+
 @media (max-width: 900px) {
   .grid {
     grid-template-columns: repeat(2, 1fr);
