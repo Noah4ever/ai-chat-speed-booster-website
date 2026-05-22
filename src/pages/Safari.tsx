@@ -66,40 +66,42 @@ export default function Safari() {
   return (
     <main className={styles.page}>
       <div className="container">
-        <Link to="/" className={styles.back}>
-          <ArrowLeft size={16} strokeWidth={2} />
-          Back to home
-        </Link>
+        <div className={styles.inner}>
+          <Link to="/" className={styles.back}>
+            <ArrowLeft size={16} strokeWidth={2} />
+            Back to home
+          </Link>
 
-        <p className="eyebrow">Safari install guide</p>
-        <h1 className={styles.title}>Run the booster in Safari.</h1>
-        <p className={styles.lead}>
-          Safari has no one-click store listing yet, so it is built locally
-          with Xcode. The steps below are loaded live from the guide in the
-          repository, so they always match the latest release.
-        </p>
+          <p className="eyebrow">Safari install guide</p>
+          <h1 className={styles.title}>Run the booster in Safari.</h1>
+          <p className={styles.lead}>
+            Safari has no one-click store listing yet, so it is built locally
+            with Xcode. The steps below are loaded live from the guide in the
+            repository, so they always match the latest release.
+          </p>
 
-        {status === "loading" && <p className={styles.note}>Loading the guide.</p>}
+          {status === "loading" && <p className={styles.note}>Loading the guide.</p>}
 
-        {status === "error" && (
-          <div className={styles.note}>
-            <p>The guide could not be loaded right now.</p>
-            <Button href={links.safariGuide} external size="lg">
-              Read it on GitHub
+          {status === "error" && (
+            <div className={styles.note}>
+              <p>The guide could not be loaded right now.</p>
+              <Button href={links.safariGuide} external size="lg">
+                Read it on GitHub
+              </Button>
+            </div>
+          )}
+
+          {status === "ready" && (
+            <article className={styles.doc}>
+              <Markdown components={components}>{markdown}</Markdown>
+            </article>
+          )}
+
+          <div className={styles.foot}>
+            <Button href={links.safariGuide} external size="lg" variant="secondary">
+              View this guide on GitHub
             </Button>
           </div>
-        )}
-
-        {status === "ready" && (
-          <article className={styles.doc}>
-            <Markdown components={components}>{markdown}</Markdown>
-          </article>
-        )}
-
-        <div className={styles.foot}>
-          <Button href={links.safariGuide} external size="lg" variant="secondary">
-            View this guide on GitHub
-          </Button>
         </div>
       </div>
     </main>
