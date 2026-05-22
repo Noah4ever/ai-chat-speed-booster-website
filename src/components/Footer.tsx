@@ -54,7 +54,7 @@ export default function Footer() {
             <Logo />
             <p className={styles.tagline}>
               Keeps long AI conversations fast by rendering only your recent
-              messages. Free, open source, no tracking.
+              messages. Free, open source, privacy-first.
             </p>
             <a
               href={links.github}
