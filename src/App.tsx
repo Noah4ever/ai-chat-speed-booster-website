@@ -4,6 +4,7 @@ import Nav from "./components/Nav";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import Safari from "./pages/Safari";
+import Privacy from "./pages/Privacy";
 
 function ScrollManager() {
   const { pathname, hash } = useLocation();
@@ -30,6 +31,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/safari" element={<Safari />} />
+        <Route path="/privacy" element={<Privacy />} />
         <Route path="*" element={<Home />} />
       </Routes>
       <Footer />

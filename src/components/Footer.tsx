@@ -32,6 +32,7 @@ const columns: FooterColumn[] = [
       { label: "Releases", href: links.releases, external: true },
       { label: "Report an issue", href: links.issues, external: true },
       { label: "MIT license", href: links.license, external: true },
+      { label: "Privacy policy", to: "/privacy" },
     ],
   },
   {
