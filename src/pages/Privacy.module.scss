@@ -2,6 +2,12 @@
   padding-block: var(--space-12) var(--space-24);
 }
 
+// Centered reading column for the whole policy.
+.inner {
+  max-width: 44rem;
+  margin-inline: auto;
+}
+
 .back {
   display: inline-flex;
   align-items: center;
@@ -20,13 +26,11 @@
 }
 
 .lead {
-  max-width: 42rem;
   margin-top: var(--space-4);
   color: var(--text-muted);
 }
 
 .doc {
-  max-width: 44rem;
   margin-top: var(--space-12);
 
   h2 {
