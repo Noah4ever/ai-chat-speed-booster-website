@@ -77,7 +77,22 @@
   color: var(--text);
 }
 
+// Mobile menu: animates open/closed with max-height + opacity. The outer
+// element clips and animates; visual styling lives on .menuPanel so the
+// border never shows as a sliver while the menu is collapsed.
 .menu {
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 0.3s var(--ease), opacity 0.25s var(--ease);
+}
+
+.menuOpen {
+  max-height: 380px;
+  opacity: 1;
+}
+
+.menuPanel {
   display: flex;
   flex-direction: column;
   padding: var(--space-2) var(--space-4) var(--space-6);

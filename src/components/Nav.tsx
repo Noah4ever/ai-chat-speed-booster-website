@@ -98,8 +98,11 @@ export default function Nav() {
         </button>
       </div>
 
-      {menuOpen && (
-        <div className={styles.menu}>
+      <div
+        className={menuOpen ? `${styles.menu} ${styles.menuOpen}` : styles.menu}
+        inert={!menuOpen}
+      >
+        <div className={styles.menuPanel}>
           {navItems.map((item) => (
             <a key={item.id} href={section(item.id)} onClick={() => setMenuOpen(false)}>
               {item.label}
@@ -109,7 +112,7 @@ export default function Nav() {
             GitHub
           </a>
         </div>
-      )}
+      </div>
     </header>
   );
 }
