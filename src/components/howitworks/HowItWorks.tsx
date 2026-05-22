@@ -6,7 +6,7 @@ import type { Phase } from "./types";
 import styles from "./HowItWorks.module.scss";
 
 const captions: Record<Phase, string> = {
-  idle: "Watch a real ChatGPT chat go from laggy to smooth. Plays right in the window.",
+  idle: "Watch a demo AI chat go from laggy to smooth. Plays right in the window.",
   lagging: "Without the extension, scrolling stutters because the browser redraws every message.",
   enabling: "One click. The extension toggle turns on.",
   boosted: "With the extension enabled, the same chat scrolls smoothly.",
@@ -143,7 +143,7 @@ export default function HowItWorks() {
             {phase === "idle" ? (
               <Button size="lg" onClick={play}>
                 <Play size={22} fill="currentColor" strokeWidth={0} />
-                Play the live demo
+                Run the live demo
               </Button>
             ) : (
               <Button size="lg" variant="secondary" onClick={play}>
