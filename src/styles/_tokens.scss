@@ -14,6 +14,8 @@
   --accent: #10a37f;
   --accent-hover: #0d8a6a;
   --accent-soft: rgba(16, 163, 127, 0.1);
+  // Darker green for accent-coloured text, to meet WCAG AA contrast on light.
+  --accent-text: #0a7d5f;
   --green: #10a37f;
   --green-hover: #0d8a6a;
   --green-soft: rgba(16, 163, 127, 0.1);
@@ -73,6 +75,7 @@
     --accent: #1abc94;
     --accent-hover: #34d3ab;
     --accent-soft: rgba(26, 188, 148, 0.14);
+    --accent-text: #1abc94;
     --green: #1abc94;
     --green-hover: #34d3ab;
     --green-soft: rgba(26, 188, 148, 0.14);
