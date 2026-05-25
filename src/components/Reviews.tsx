@@ -88,9 +88,9 @@ export default function Reviews() {
           <span className={styles.ratingBig}>4.8</span>
           <Stars count={5} />
           <span className={styles.divider} aria-hidden="true" />
-          <span className={styles.meta}>24 ratings</span>
+          <span className={styles.meta}>25 ratings</span>
           <span className={styles.divider} aria-hidden="true" />
-          <span className={styles.meta}>2,000 users</span>
+          <span className={styles.meta}>4,000 users</span>
           <a
             href={links.chromeReviews}
             target="_blank"
