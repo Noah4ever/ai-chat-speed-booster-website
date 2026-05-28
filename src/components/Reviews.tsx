@@ -90,7 +90,7 @@ export default function Reviews() {
           <span className={styles.divider} aria-hidden="true" />
           <span className={styles.meta}>25 ratings</span>
           <span className={styles.divider} aria-hidden="true" />
-          <span className={styles.meta}>4,000 users</span>
+          <span className={styles.meta}>5,000 users</span>
           <a
             href={links.chromeReviews}
             target="_blank"
